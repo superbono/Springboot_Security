@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+// WebMvcConfig 메모리에 올리기 위해 필요한 어노테이션
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
