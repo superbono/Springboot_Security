@@ -21,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 
 /*
+*  로직
 *  1.코드받기 (인증) 2. 엑세스토큰 받기 (권한생성) 3. 사용자프로필정보 가져오기 4. 정보를 토대로 회원가입 자동진행
 *  4-2 (이메일, 전화번호, 이름, 아이디) 쇼핑몰 -> (집주소), 백화점몰 -> (vip등급, 일반등급)
 */
