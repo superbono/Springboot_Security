@@ -27,6 +27,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 위에 설정한 antMatchers에 설정된 url로 접근시 설정한 페이지로 이동하도록 설정.
                 .formLogin()
                 // 로그인 페이지로 이동.
-                .loginPage("/login");
+                .loginPage("/loginForm");
     }
 }

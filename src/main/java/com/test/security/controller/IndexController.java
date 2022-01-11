@@ -1,11 +1,20 @@
 package com.test.security.controller;
 
+import com.test.security.model.User;
+import com.test.security.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class IndexController {
+
+    @Autowired
+    private UserRepository repository;
+
 
     @GetMapping({"","/"})
     public String index() {
@@ -28,19 +37,22 @@ public class IndexController {
     }
 
     // SecurityConfig 파일을 생성하면 기존 Security 인풋창이 작동안함.
-    @GetMapping("/login")
-    public @ResponseBody String login() {
-        return "login";
+    @GetMapping("/loginForm")
+    public String login() {
+        return "loginForm";
     }
 
-    @GetMapping("/join")
-    public @ResponseBody String join() {
+    @GetMapping("/joinForm")
+    public String joinForm() {
+        return "joinForm";
+    }
+
+    @PostMapping("/join")
+    public @ResponseBody String join(User user) {
+        System.out.println(user);
+        user.setRole("ROLE_USER");
+        repository.save(user);
         return "join";
-    }
-
-    @GetMapping("/joinProc")
-    public @ResponseBody String joinProc() {
-        return "회원가입이 완료되었습니다.";
     }
 
 }
