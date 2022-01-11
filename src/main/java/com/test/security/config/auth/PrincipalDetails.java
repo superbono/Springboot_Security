@@ -9,14 +9,17 @@ package com.test.security.config.auth;
 // Security Session => Authentication의 객체안에 => UserDetails의 타입(User정보)이어야 한다.
 
 import com.test.security.model.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
-public class PrincipalDetails implements UserDetails {
+@Data
+public class PrincipalDetails implements UserDetails, OAuth2User {
 
     private static final long serialVersionUID = 1L;
     private User user;
@@ -72,5 +75,15 @@ public class PrincipalDetails implements UserDetails {
         Collection<GrantedAuthority> collet = new ArrayList<GrantedAuthority>();
         collet.add(()->{ return user.getRole();});
         return collet;
+    }
+
+    @Override
+    public <A> A getAttribute(String name) {
+        return OAuth2User.super.getAttribute(name);
+    }
+
+    @Override
+    public String getName() {
+        return null;
     }
 }

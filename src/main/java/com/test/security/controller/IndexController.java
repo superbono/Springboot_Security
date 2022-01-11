@@ -1,11 +1,16 @@
 package com.test.security.controller;
 
+import com.test.security.config.auth.PrincipalDetails;
 import com.test.security.model.User;
 import com.test.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +25,31 @@ public class IndexController {
 
     @Autowired
     private BCryptPasswordEncoder pwdEncode;
+
+    @GetMapping("/test/login")
+    public @ResponseBody String loginTest(Authentication authentication, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        System.out.println("/test/login =====================");
+        PrincipalDetails details = (PrincipalDetails) authentication.getPrincipal();
+        System.out.println("authentication - "+ details.getUser());
+        return "세션정보 확인하기";
+    }
+
+    @GetMapping("/test/oauth/login")
+    public @ResponseBody String testOauthLogin(Authentication authentication) {
+        System.out.println("/test/oauth/login =====================");
+        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+        System.out.println("authentication - "+ oAuth2User.getAttributes());
+        return "OAuth 세션정보 확인하기";
+    }
+
+    @GetMapping("/test/oauth2/login")
+    public @ResponseBody String testOauthLogin2(Authentication authentication, @AuthenticationPrincipal OAuth2User oauth) {
+        System.out.println("/test/oauth2/login =====================");
+        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+        System.out.println("authentication - "+ oAuth2User.getAttributes());
+        System.out.println("oauth2User" + oauth.getAttributes());
+        return "OAuth 세션정보 확인하기";
+    }
 
     @GetMapping({"","/"})
     public String index() {
