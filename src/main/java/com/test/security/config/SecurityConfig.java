@@ -12,14 +12,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 // SecurityConfig를 메모리에 올리기 위해 필요한 어노테이션
 @Configuration
-// 시큐리티를 활성화 시키기 위해 필요한 어노테이션
-// SecurityConfig 활성화 시키면 스프링시큐리티필터(여기서는 SecurityConfig를 말함)가 스프링필터체인에 등록이 된다.
+/*
+* 시큐리티를 활성화 시키기 위해 필요한 어노테이션
+* SecurityConfig 활성화 시키면 스프링시큐리티필터(여기서는 SecurityConfig를 말함)가 스프링필터체인에 등록이 된다.
+*/
 @EnableWebSecurity
 // secured 어노테이션 활성화, preAuthorize, postAuthorize 어노테이션 활성화
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 
-// 1.코드받기 (인증) 2. 엑세스토큰 받기 (권한생성) 3. 사용자프로필정보 가져오기 4. 정보를 토대로 회원가입 자동진행
-// 4-2 (이메일, 전화번호, 이름, 아이디) 쇼핑몰 -> (집주소), 백화점몰 -> (vip등급, 일반등급)
+/*
+*  1.코드받기 (인증) 2. 엑세스토큰 받기 (권한생성) 3. 사용자프로필정보 가져오기 4. 정보를 토대로 회원가입 자동진행
+*  4-2 (이메일, 전화번호, 이름, 아이디) 쇼핑몰 -> (집주소), 백화점몰 -> (vip등급, 일반등급)
+*/
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
