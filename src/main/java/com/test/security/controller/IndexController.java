@@ -53,5 +53,4 @@ public class IndexController {
         repository.save(user);
         return "join";
     }
-
 }
