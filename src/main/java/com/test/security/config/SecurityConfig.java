@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 // SecurityConfig를 메모리에 올리기 위해 필요한 어노테이션
 @Configuration
 /*
+* 주석테스트
 * 시큐리티를 활성화 시키기 위해 필요한 어노테이션
 * SecurityConfig 활성화 시키면 스프링시큐리티필터(여기서는 SecurityConfig를 말함)가 스프링필터체인에 등록이 된다.
 */
