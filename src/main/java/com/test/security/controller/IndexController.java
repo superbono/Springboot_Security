@@ -3,6 +3,9 @@ package com.test.security.controller;
 import com.test.security.model.User;
 import com.test.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +17,9 @@ public class IndexController {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private BCryptPasswordEncoder pwdEncode;
 
     @GetMapping({"","/"})
     public String index() {
@@ -36,9 +42,9 @@ public class IndexController {
     }
 
     // SecurityConfig 파일을 생성하면 기존 Security 인풋창이 작동안함.
-    @GetMapping("/loginForm")
+    @GetMapping("/login")
     public String login() {
-        return "loginForm";
+        return "login";
     }
 
     @GetMapping("/joinForm")
@@ -47,10 +53,32 @@ public class IndexController {
     }
 
     @PostMapping("/join")
-    public @ResponseBody String join(User user) {
+    public String join(User user) {
         System.out.println(user);
         user.setRole("ROLE_USER");
-        repository.save(user);
-        return "join";
+        String rawPassword = user.getPassword();
+        String encPassword = pwdEncode.encode(rawPassword);
+        user.setPassword(encPassword);
+        repository.save(user); //이렇게 회원가입을 할 경우, 1. 비밀번호 암호화가 안되어있어서 그대로 노출/ 2. 패스워드가 암호화가 안되어있어 시큐리티 접근이 안된다.
+        return "redirect:/login";
+    }
+
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/priv")
+    public @ResponseBody String priv() {
+        return "어드민정보";
+    }
+
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+    @GetMapping("/data")
+    public @ResponseBody String data() {
+        return "데이터정보";
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+
+    @GetMapping("/info")
+    public @ResponseBody String info () {
+        return "유저정보";
     }
 }

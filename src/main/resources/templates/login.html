@@ -8,7 +8,7 @@
     <div>
         <h1>로그인 페이지</h1>
         <hr>
-        <form>
+        <form action="/loginProc" method="post">
             <div>
                 <label>아이디: </label>
                 <input type="text" name="username" placeholder="Username">
@@ -20,6 +20,7 @@
             <button type="submit">로그인</button>
             <button type="reset">취소</button>
         </form>
+        <a href="/oauth2/authorization/google">구글로그인</a>
         <a href="/joinForm">회원가입을 아직 안하셨나요?</a>
     </div>
 </body>

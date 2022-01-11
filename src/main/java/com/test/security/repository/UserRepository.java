@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 // JpaRepository를 상속하면 기본적인 CRUD를 갖고 있기 떄문에 해당 함수를 통해 구현할 수 있다.
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+    // select * from User where username = ? 호출
+    User findByUsername(String username);  // JPA Query Methods
+
 }
