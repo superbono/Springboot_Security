@@ -15,7 +15,6 @@ public class IndexController {
     @Autowired
     private UserRepository repository;
 
-
     @GetMapping({"","/"})
     public String index() {
         return "index";
