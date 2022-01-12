@@ -1,10 +1,7 @@
 package com.test.security.config.oauth;
 
 import com.test.security.config.auth.PrincipalDetails;
-import com.test.security.config.oauth.Provider.FacebookInfo;
-import com.test.security.config.oauth.Provider.GoogleUserInfo;
-import com.test.security.config.oauth.Provider.NaverUserInfo;
-import com.test.security.config.oauth.Provider.OAuth2UserInfo;
+import com.test.security.config.oauth.Provider.*;
 import com.test.security.model.User;
 import com.test.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +46,10 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             System.out.println("네이버 로그인");
             oAuth2UserInfo = new NaverUserInfo((Map)oAuth2User.getAttributes().get("response"));
             System.out.println("NaverInfo"+oAuth2User);
+        } else if (userRequest.getClientRegistration().getRegistrationId().equals("kakao")) {
+            System.out.println("카카오 로그인");
+            oAuth2UserInfo = new KakaoUserInfo((Map)oAuth2User.getAttributes().get("response"));
+            System.out.println("KakaoUserInfo"+oAuth2User);
         } else {
             System.out.println("지원하지 않는 OAuth2입니다.");
         }
