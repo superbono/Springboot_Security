@@ -45,11 +45,11 @@ spring:
             redirect-uri: http://localhost:8080/login/oauth2/code/naver
 
           kakao:
-            client-id: 3ee1de043caaaae5adf710dcce21cc41
+            client-id: 4a77a24130b857c5678575043d82c4f1
+            client-secret: wiiSlxjUU3niQroQXvqofVz6Chd3cWB4
             scope:
-              - profile_nickname
               - account_email
-              - profile_image
+              - profile_nickname
             client-name: Kakao # 클라이언트 네임은 구글 페이스북도 대문자로 시작하더라.
             authorization-grant-type: authorization_code
             redirect-uri: http://localhost:8080/login/oauth2/code/kakao
@@ -62,9 +62,9 @@ spring:
             user-name-attribute: response # 회원정보를 json의 response 키값으로 리턴해줌.
 
           kakao:
-            authorizationUri: https://kauth.kakao.com/oauth/authorize
-            tokenUri: https://kauth.kakao.com/oauth/token
-            userInfoUri: https://kapi.kakao.com/v2/user/me
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: response # 회원정보를 json의 response 키값으로 리턴해줌.
 
   mvc:
