@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 // 시큐리티 설정에서 loginProcessingUrl에서 login 요청이 오면 자동으로 UserDetailsService 타입으 Loc되어있는 loadUserByname이 호출됨
 // 로그인 로직 작동순서 => view에서 action="/login"이 요청되면, UserDetailService가 등록된 클래스를 찾는다.
+// PrincipalDetailsService를 종료시 @AuthenticationPrincipal 어노테이션이 생성된다.
 @Service
 public class PrincipalDetailsService implements UserDetailsService {
 

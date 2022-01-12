@@ -61,8 +61,10 @@ public class IndexController {
         return "admin";
     }
 
+    // 구글로 로그인,일반로그인 시 PrincipalDetails로 받을 수 있다.
     @GetMapping("/user")
-    public @ResponseBody String user() {
+    public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        System.out.println("principalDetails" + principalDetails.getUser());
         return "user";
     }
 
